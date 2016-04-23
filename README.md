@@ -1,2 +1,2 @@
 # SimplePlayer
-A simple music player
+A simple music player, working version
