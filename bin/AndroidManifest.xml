@@ -19,7 +19,6 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".component.activity.SongListActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,11 +33,15 @@
             android:exported="false" >
         </service>
 
-        <activity android:name="com.amardeep.simpleplayer.component.activity.SongControllerActivity" 
-             android:label="@string/now_playing">
+        <activity
+            android:name=".component.activity.SongControllerActivity"
+            android:label="@string/now_playing" >
         </activity>
-         <activity android:name="com.amardeep.simpleplayer.component.activity.AlbumSongListActivity" 
-            >
+        <activity android:name=".component.activity.AlbumSongListActivity" >
+        </activity>
+        <activity
+            android:name="com.amardeep.simpleplayer.component.activity.EqualizerActivity"
+            android:label="@string/title_activity_equalizer" >
         </activity>
     </application>
 

@@ -12,5 +12,7 @@
     <string name="play_pause_toggle">Toggle</string>
     <string name="next_song">Next song</string>
     <string name="previous_song">Previous song</string>
+    <string name="title_activity_equalizer">EqualizerActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

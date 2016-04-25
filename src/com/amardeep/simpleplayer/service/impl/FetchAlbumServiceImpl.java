@@ -24,7 +24,7 @@ public class FetchAlbumServiceImpl implements FetchAlbumService {
 		try {
 			cursor = contentResolver.query(
 					MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, columns,
-					null, null, null);
+					null, null, android.provider.MediaStore.Audio.Albums.ALBUM );
 			while (cursor.moveToNext()) {
 				Album album = new Album();
 				album.setId(cursor.getLong(cursor
