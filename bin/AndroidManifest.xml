@@ -37,6 +37,9 @@
         <activity android:name="com.amardeep.simpleplayer.component.activity.SongControllerActivity" 
              android:label="@string/now_playing">
         </activity>
+         <activity android:name="com.amardeep.simpleplayer.component.activity.AlbumSongListActivity" 
+            >
+        </activity>
     </application>
 
 </manifest>

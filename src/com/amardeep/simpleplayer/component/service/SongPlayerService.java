@@ -6,6 +6,8 @@ import java.util.List;
 import android.app.Service;
 import android.content.ContentUris;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -17,6 +19,7 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.util.Log;
 
+import com.amardeep.simpleplayer.constants.SimplePlayerConstants;
 import com.anardeep.simpleplayer.model.Song;
 
 public class SongPlayerService extends Service {
@@ -30,9 +33,11 @@ public class SongPlayerService extends Service {
 	public boolean isRepeatFlag() {
 		return repeatFlag;
 	}
+
 	public int getSongPosn() {
 		return songPosn;
 	}
+
 	public void setRepeatFlag() {
 		if (this.repeatFlag)
 			this.repeatFlag = false;
@@ -60,6 +65,7 @@ public class SongPlayerService extends Service {
 
 	@Override
 	public boolean onUnbind(Intent intent) {
+		Log.i("SongPlayerService", "Service unBound");
 		if (mediaPlayer != null) {
 			mediaPlayer.stop();
 			mediaPlayer.release();
@@ -131,12 +137,15 @@ public class SongPlayerService extends Service {
 		if (mediaPlayer != null) {
 			mediaPlayer.reset();
 			this.songPosn = position;
+			Log.i("SongPlayerService", "position ----> " + this.songPosn);
+			Log.i("SongPlayerService", "song list ----> " + this.songList);
 			Uri trackUri = ContentUris
 					.withAppendedId(
 							android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
 							this.songList.get(position).getId());
 			try {
 				mediaPlayer.setDataSource(getApplicationContext(), trackUri);
+				saveCurrentSongData();
 			} catch (Exception e) {
 				Log.e("SongPlayerService", "Error setting data source", e);
 			}
@@ -206,5 +215,14 @@ public class SongPlayerService extends Service {
 
 	public void repeat() {
 		mediaPlayer.setLooping(repeatFlag);
+	}
+
+	public void saveCurrentSongData() {
+		SharedPreferences pref = getApplicationContext().getSharedPreferences(
+				SimplePlayerConstants.CURRENT_SONG_DATA, MODE_PRIVATE);
+		Editor editor = pref.edit();
+		editor.putString(SimplePlayerConstants.CURRENT_SONG_TITLE, getSong().getSongTitle());
+		editor.putString(SimplePlayerConstants.CURRENT_SONG_ARTIST,getSong().getSongArtist());
+		editor.apply();
 	}
 }

@@ -8,7 +8,7 @@
     <string name="action_repeat">Repeat</string>
     <string name="title_activity_song_controller_activy">Now playing</string>
     <string name="song_view">Song view</string>
-    <string name="now_playing">Go to now playing</string>
+    <string name="now_playing">Now playing</string>
     <string name="play_pause_toggle">Toggle</string>
     <string name="next_song">Next song</string>
     <string name="previous_song">Previous song</string>
