@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
    	android:orientation="horizontal"
+   	android:id="@+id/equalizer_layout"
     tools:context="com.amardeep.simpleplayer.component.activity.EqualizerActivity" >
 
 </LinearLayout>

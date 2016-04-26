@@ -110,10 +110,12 @@ public class ListAllSongsFragment extends Fragment {
 							playPauseToggle
 									.setImageResource(R.drawable.ic_play_arrow_black_24dp);
 						}
-						nowPlayingTitleView.setText(songPlayerService.getSong()
-								.getSongTitle());
-						nowPlayingArtistView.setText(songPlayerService
-								.getSong().getSongArtist());
+						String songTitle = songPlayerService.getSong().getSongTitle();
+						if (songTitle != null)
+							nowPlayingTitleView.setText(songTitle);
+						String songArtist = songPlayerService.getSong().getSongArtist();
+						if (songArtist != null)
+							nowPlayingArtistView.setText(songArtist);
 						Intent songControllerActivityIntent = new Intent(
 								getActivity(), SongControllerActivity.class);
 						startActivity(songControllerActivityIntent);
@@ -235,12 +237,12 @@ public class ListAllSongsFragment extends Fragment {
 			if (nowPlayingTitleView != null && nowPlayingArtistView != null) {
 				Log.i("SongListActivity",
 						"onStart() nowPlayingTitleView!=null setText()");
-				nowPlayingTitleView
-						.setText(((SongPlayerService) songPlayerService)
-								.getSong().getSongTitle());
-				nowPlayingArtistView
-						.setText(((SongPlayerService) songPlayerService)
-								.getSong().getSongArtist());
+				String songTitle = songPlayerService.getSong().getSongTitle();
+				if (songTitle != null)
+					nowPlayingTitleView.setText(songTitle);
+				String songArtist = songPlayerService.getSong().getSongArtist();
+				if (songArtist != null)
+					nowPlayingArtistView.setText(songArtist);
 			}
 			if (((SongPlayerService) songPlayerService).isPng()) {
 				playPauseToggle
@@ -259,10 +261,12 @@ public class ListAllSongsFragment extends Fragment {
 			if (nowPlayingTitleView != null && nowPlayingArtistView != null) {
 				Log.i("SongListActivity",
 						"onResume() nowPlayingTitleView!=null setText()");
-				nowPlayingTitleView.setText(songPlayerService.getSong()
-						.getSongTitle());
-				nowPlayingArtistView.setText(songPlayerService.getSong()
-						.getSongArtist());
+				String songTitle = songPlayerService.getSong().getSongTitle();
+				if (songTitle != null)
+					nowPlayingTitleView.setText(songTitle);
+				String songArtist = songPlayerService.getSong().getSongArtist();
+				if (songArtist != null)
+					nowPlayingArtistView.setText(songArtist);
 			}
 			if (((SongPlayerService) songPlayerService).isPng()) {
 				nowPlayingLayoutRoot.setVisibility(View.VISIBLE);
@@ -308,8 +312,10 @@ public class ListAllSongsFragment extends Fragment {
 
 	public void fetchCurrentSongData() {
 		SharedPreferences prefs = getContext().getSharedPreferences(
-				SimplePlayerConstants.CURRENT_SONG_DATA,Context.MODE_PRIVATE);
-		currentSongTitle=prefs.getString(SimplePlayerConstants.CURRENT_SONG_TITLE, "No title");
-		currentSongArtist=prefs.getString(SimplePlayerConstants.CURRENT_SONG_ARTIST,"No artist");
+				SimplePlayerConstants.CURRENT_SONG_DATA, Context.MODE_PRIVATE);
+		currentSongTitle = prefs.getString(
+				SimplePlayerConstants.CURRENT_SONG_TITLE, "No title");
+		currentSongArtist = prefs.getString(
+				SimplePlayerConstants.CURRENT_SONG_ARTIST, "No artist");
 	}
 }

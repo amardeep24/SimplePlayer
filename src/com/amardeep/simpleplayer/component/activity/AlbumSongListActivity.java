@@ -96,6 +96,7 @@ public class AlbumSongListActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		unbindService(serviceConnection);
 	}
 
 	ServiceConnection serviceConnection = new ServiceConnection() {

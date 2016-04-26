@@ -13,6 +13,7 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnPreparedListener;
+import android.media.audiofx.Equalizer;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
@@ -27,6 +28,7 @@ public class SongPlayerService extends Service {
 	private MediaPlayer mediaPlayer;
 	private IBinder mBinder;
 	private int songPosn;
+	Equalizer mEqualizer;
 
 	private boolean repeatFlag = false;
 
@@ -224,5 +226,15 @@ public class SongPlayerService extends Service {
 		editor.putString(SimplePlayerConstants.CURRENT_SONG_TITLE, getSong().getSongTitle());
 		editor.putString(SimplePlayerConstants.CURRENT_SONG_ARTIST,getSong().getSongArtist());
 		editor.apply();
+	}
+	//method to fetch equalizer
+	public Equalizer getEqualizer()
+	{
+		if(mediaPlayer!=null)
+		{
+			mEqualizer=new Equalizer(0,mediaPlayer.getAudioSessionId());
+			mEqualizer.setEnabled(true);
+		}
+		return mEqualizer;
 	}
 }
